@@ -30,6 +30,18 @@ https://user-images.githubusercontent.com/49595269/215292487-7e7bf274-4a0b-4cab-
 
 
 ## Complex data model
+### Modifications:
+
+Here are the modifications to add relationship between models. 
+
+* models/purchase_order.py:
+    * Adding Customer data model
+    * Adding dependency of email field (also need to add dependency in `requirements-xia.txt`)
+* config.py
+    * Adding new mapping `"customer": Customer` to `RESOURCE_MAPPING`
+
+Yes, that is all
+
 ### Relationship
 
 The last part of [Tutorial API 01-01](https://github.com/X-I-A/xia-tutorial-api-01-01) explained that the embedded 
@@ -47,18 +59,6 @@ This link could be defined easily with adding an ExternalField into data model `
 * `field_map` defines the field mapping: `PurchaseOrder`.`customer` = `Customer`.`id`
 
 It is possible to add multiple field map. The result could also be a list. Check [technical document]((https://develop.x-i-a.com/docs/xia-engine/stable/_autosummary/xia_engine.fields.ExternalField.html#xia_engine.fields.ExternalField)) for more details.
-
-### Modifications:
-
-Here are the modifications we have made to Tutorial 01. 
-
-* models/purchase_order.py:
-    * Adding Customer data model
-    * Adding dependency of email field (also need to add dependency in `requirements-xia.txt`)
-* config.py
-    * Adding new mapping `"customer": Customer` to `RESOURCE_MAPPING`
-
-Yes, that is all
 
 ### Lazy Load
 
