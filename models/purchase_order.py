@@ -18,4 +18,4 @@ class PurchaseOrder(Document):
     customer: str = StringField(description="Customer")
     customer_detail = ExternalField(document_type=Customer,
                                     description="Customer Detail",
-                                    field_map={"customer": "name"})
+                                    field_map={"customer": "id"})
