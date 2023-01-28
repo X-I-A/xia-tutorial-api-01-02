@@ -31,9 +31,16 @@ Here is a 40-second-video to show briefly how the new data model impacts the edi
 https://user-images.githubusercontent.com/49595269/212566125-f644dd46-3ba0-489d-a98f-c63f9b24cde5.mp4
 
 
-## What is 
-### Define your own data model
+## Complex data model
+### Relationship
 
+The last part of [Tutorial API 01-01](https://github.com/X-I-A/xia-tutorial-api-01-01) explained that the embedded 
+document represents the information which should be a part of the document. The other case of relationship between two 
+data models is the simple link. In the given example code, a purchase order holds the customer id and from the id we
+could retrieve the customer's full information.
+
+
+* [Tutorial API 00-01](https://github.com/X-I-A/xia-tutorial-api-00-01): Descriptive Data Model Design
 In order to use your own data model, you just need to focus on kernel code.
 
 1. Adapting data models in models directory

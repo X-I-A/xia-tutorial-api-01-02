@@ -1,16 +1,12 @@
 from xia_fields import StringField
 from xia_fields_network import EmailField
-from xia_engine import Document, EmbeddedDocument
-from xia_engine import ExternalField, EmbeddedDocumentField
+from xia_engine import Document
+from xia_engine import ExternalField
 
 
 class Customer(Document):
     id: str = EmailField(description="Customer Email")
     name: str = StringField(description="Customer Name")
-
-
-class DeliveryAddress(EmbeddedDocument):
-    address: str = StringField(description="Delivery Address")
 
 
 class PurchaseOrder(Document):
@@ -19,7 +15,6 @@ class PurchaseOrder(Document):
                                     required=True,
                                     default="new",
                                     choices=["new", "paid", "delivered"])
-    delivery_address = EmbeddedDocumentField(document_type=DeliveryAddress)
     customer: str = StringField(description="Customer")
     customer_detail = ExternalField(document_type=Customer,
                                     description="Customer Detail",
