@@ -1,4 +1,4 @@
-# X-I-A API Tutorial - 01
+# X-I-A API Tutorial - 01-02: Advanced Data Model
 ## Getting Started
 
 Welcome to XIA API tutorial!
@@ -12,34 +12,26 @@ Each tutorial is ended by a series number like 01-02-03. The longer the series i
 It will be better to finish basic tutorial before going through advanced ones. Each tutorial has example code. 
 Installation instruction could be found at tutorial/install.md.
 
-## Let's start !
-### Data to API in 2 minutes
+## Prerequisites
+
+Already finish the reading of
+* [Tutorial API 01](https://github.com/X-I-A/xia-tutorial-api-01)
+* [Tutorial API 01-01](https://github.com/X-I-A/xia-tutorial-api-01-01)
+
+## Start with example
 
 Please clone and deployed the example code (see [installation guide](tutorial/install.md) for instruction).
 
-Or just visiting the already deployed [online version](https://xia-tutorial-api-01-srspyyjtqa-ew.a.run.app/order)
+Or just visiting the already deployed [online version](https://xia-tutorial-api-01-02-srspyyjtqa-ew.a.run.app/order)
 
-After it is done, three services are deployed:
+Only [models/purchase_order.py](models/purchase_order.py) has been modified to get the new data model work.
 
-* /doc: Auto-generated OpenAPI document
+Here is a 40-second-video to show briefly how the new data model impacts the editor and api endpoints:
 
-[online version](https://xia-tutorial-api-01-srspyyjtqa-ew.a.run.app/doc)
-
-![screen shot of openapi specification](tutorial/openapi.PNG)
-
-* /api: API Endpoint
-
-![screen shot of API root](tutorial/api.PNG)
-
-* /: Frontend Editor
-
-![screen shot of editor](tutorial/editor.PNG)
-
-Here is a 30-second-video to show briefly how editor works:
-
-https://user-images.githubusercontent.com/49595269/212530070-17cf7f9e-c75f-43b8-ab51-4317dccb1812.mp4
+https://user-images.githubusercontent.com/49595269/212566125-f644dd46-3ba0-489d-a98f-c63f9b24cde5.mp4
 
 
+## What is 
 ### Define your own data model
 
 In order to use your own data model, you just need to focus on kernel code.
