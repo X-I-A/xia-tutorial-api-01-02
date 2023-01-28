@@ -24,11 +24,9 @@ Please clone and deployed the example code (see [installation guide](tutorial/in
 
 Or just visiting the already deployed [online version](https://xia-tutorial-api-01-02-srspyyjtqa-ew.a.run.app/order)
 
-Only [models/purchase_order.py](models/purchase_order.py) has been modified to get the new data model work.
-
 Here is a 40-second-video to show briefly how the new data model impacts the editor and api endpoints:
 
-https://user-images.githubusercontent.com/49595269/212566125-f644dd46-3ba0-489d-a98f-c63f9b24cde5.mp4
+https://user-images.githubusercontent.com/49595269/215292487-7e7bf274-4a0b-4cab-9747-d36b2b9e866b.mp4
 
 
 ## Complex data model
@@ -39,53 +37,38 @@ document represents the information which should be a part of the document. The 
 data models is the simple link. In the given example code, a purchase order holds the customer id and from the id we
 could retrieve the customer's full information.
 
-
-* [Tutorial API 00-01](https://github.com/X-I-A/xia-tutorial-api-00-01): Descriptive Data Model Design
-In order to use your own data model, you just need to focus on kernel code.
-
-1. Adapting data models in models directory
-2. Importing defined models into config.py
-3. Defining resource mapping in config.py. 
+This link could be defined easily with adding an ExternalField into data model `PurchaseOrder`:
 ```
-    RESOURCE_MAPPING = { "order": PurchaseOrder }
+    customer_detail = ExternalField(document_type=Customer,
+                                    description="Customer Detail",
+                                    field_map={"customer": "id"})
 ```
-For the above example, if you want to manipulate Python data model PurchaseOrder, you could use:
-* /api/order for api call
-* /order for web editing
+* `document_type` defines the related data model is `Customer`
+* `field_map` defines the field mapping: `PurchaseOrder`.`customer` = `Customer`.`id`
 
-### Other files:
+It is possible to add multiple field map. The result could also be a list. Check [technical document]((https://develop.x-i-a.com/docs/xia-engine/stable/_autosummary/xia_engine.fields.ExternalField.html#xia_engine.fields.ExternalField)) for more details.
 
-Only 6 other files relates to the application. Other files are related to tutorial
+### Modifications:
 
-* compile.py: Used to compile static files, including html file from defined data models
-* Dockerfile: build container
-* main.py: Flask application main program
-* requirements.txt: pip package dependencies 
-* requirement-xia.txt: pip package dependencies of xia scope
-* VERSION: Deploy version, Single source of truth of version number in CI/CD process
+Here are the modifications we have made to Tutorial 01. 
 
-Also keeping two empty directories:
-* static: Holding static files
-* templates: Holding html templates
+* models/purchase_order.py:
+    * Adding Customer data model
+    * Adding dependency of email field (also need to add dependency in `requirements-xia.txt`)
+* config.py
+    * Adding new mapping `"customer": Customer` to `RESOURCE_MAPPING`
 
-And also a js library:
-* /static/js/redoc: Parsing OpenApi schema to webpage, based on [Redocly](https://github.com/Redocly/redoc)
+Yes, that is all
 
-That is all what you need to make it work
+### Lazy Load
 
-### Next Step: Making your data persistent
+To avoid over-fetching data, the default retrieve mode is lazy:
+* All external field won't be loaded from related data model
+* All runtime data won't be unpacked. For an example, if a field is stored compressed, only compressed data will be 
+shown in default mode.
 
-Data Model use by default RamEngine which keeps data in Memory. 
-In order to make your data persistent, you will need to change data engine. 
-X-I-A is capable of working with any database. Please follow the next tutorial:
-* Tutorial 02: Database Engine Integration
-* Tutorial 03: User Authentication
-* Tutorial 04: Authorization Management
-* Tutorial 05: Applying rate limits // Payment
-* Tutorial 06: Making independent microservice work as a complex application 
-* Tutorial 07: Examples of complex application
+To make the model load all data, we must add `lazy=false` parameter.
 
-### Going deeper on data model topic
-* [Tutorial 01-01](https://github.com/X-I-A/xia-tutorial-api-01-01): Simple Data Model (Documents / Fields / Actions / EmbeddedDocuments)
-* Tutorial 01-02: Advanced Data Models (ExternalDocument)
+The default behavior will help to render the frontend part by part. We have also using catalog parameter to avoid 
+under-fetching. More detail will be given at 
 * Tutorial 01-03: Framework natively avoids over fetching and under fetching

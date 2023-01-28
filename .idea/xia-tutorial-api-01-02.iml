@@ -4,5 +4,9 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="xia-compiler-jsoneditor" />
+    <orderEntry type="module" module-name="xia-api" />
+    <orderEntry type="module" module-name="xia-engine" />
+    <orderEntry type="module" module-name="xia-fields" />
   </component>
 </module>
